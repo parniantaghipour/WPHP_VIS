@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msvalidate.01" content="EE262A0F3FB70B7F2C6CA6EE38CB9AAD" />
+    <meta name='robots' content='index,follow' />
+    <link rel="icon" type="image/png" href="{% static 'ink-.ico' %}">
+    <title>WPHP EXPLORE</title>
+    <style>
+      #fixedTextContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        z-index: 9999;
+      }
+  
+      #personsText {
+        position: absolute;
+        left: 50px; /* Adjust as per your requirement */
+        top: 35px;
+        font-size: 40px;
+        font-weight: bold;
+        font-style: italic;
+        color:#65b651;
+      }
+  
+      #titlesText {
+        position: absolute;
+        left: 520px; /* Adjust as per your requirement */
+        top: 35px;
+        font-size: 40px;
+        font-weight: bold;
+        font-style: italic;
+        color: #5176f1;
+      }
+  
+      #firmsText {
+        position: absolute;
+        left: 910px; /* Adjust as per your requirement */
+        top: 35px;
+        font-size: 40px;
+        font-weight: bold;
+        font-style: italic;
+        color: #8b2c83;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/d3-svg-textures"></script>
+<script src="https://unpkg.com/d3-patterns"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.7/build/d3.layout.cloud.js"></script>
+
+
+</head>
+
+<body>
+  <!-- <div class="search-bar">
+    <input type="text" placeholder="Enter search query..." id="search-input">
+    <button id="search-button">Search</button>
+  </div> -->
+  <div id="fixedTextContainer">
+    <div id="personsText">Persons</div>
+    <div id="titlesText">Titles</div>
+    <div id="firmsText">Firms</div>
+  </div>
+   <div id="timeline"></div>
+  <div id="sidebar"></div>
+
+  <script type="text/javascript" src="./../static/data.js"></script>
+   <script type="text/javascript" src="./../static/demoScript.js"></script>
+
+   <!-- <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg" version="1.1"> <defs> <pattern id="diagonal-stripe-2" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzInLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern> </defs> </svg> -->
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="diagonal-stripe-2-white" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#ffffff" />
+        <line x1="0" y1="8" x2="8" y2="0" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #ffffff; /* Background color */
+        }
+      </style>
+    </defs>
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg> 
+   
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="diagonal-stripe-1-white" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#ffffff" />
+        <line x1="0" y1="0" x2="8" y2="8" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #ffffff; /* Background color */
+        }
+      </style>
+    </defs>
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg>
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="crosshatch-white" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#ffffff" />
+        <line x1="0" y1="0" x2="8" y2="8" stroke="#000" stroke-width="1" />
+        <line x1="0" y1="8" x2="8" y2="0" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #ffffff; /* Background color */
+        }
+      </style>
+    </defs>
+  
+    <!-- Add the background rect -->
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg>
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="diagonal-stripe-2" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#65b651" />
+        <line x1="0" y1="8" x2="8" y2="0" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #65b651; /* Background color */
+        }
+      </style>
+    </defs>
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg> 
+   
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="diagonal-stripe-1" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#65b651" />
+        <line x1="0" y1="0" x2="8" y2="8" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #65b651; /* Background color */
+        }
+      </style>
+    </defs>
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg>
+   <svg height="8" width="8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <pattern id="crosshatch" patternUnits="userSpaceOnUse" width="8" height="8">
+        <rect width="8" height="8" fill="#65b651" />
+        <line x1="0" y1="0" x2="8" y2="8" stroke="#000" stroke-width="1" />
+        <line x1="0" y1="8" x2="8" y2="0" stroke="#000" stroke-width="1" />
+      </pattern>
+      <style>
+        rect#crosshatch-background {
+          fill: #65b651; /* Background color */
+        }
+      </style>
+    </defs>
+  
+    <!-- Add the background rect -->
+    <rect id="crosshatch-background" width="8" height="8" />
+  </svg>
+  
+  <!--    <script type="text/javascript">
+        $(document).ready(function(){
+          window.addEventListener("load", (event)=>{
+            window.demo = new Demo({});
+          })
+            
+        }) -->
+<!--     </script>
+ -->
+     
+</body>
+<img src="./../static/images/trash.svg" alt="trash" width="500" height="600", hidden = "hidden">
+
+</html>
